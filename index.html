@@ -122,7 +122,8 @@
         nombre: "Requerimientos",
         url: "https://hojarecepcionalm-lb.onrender.com/",
         icono: "boxes",
-        colorGradiente: "from-emerald-500 to-teal-600"
+        colorGradiente: "from-emerald-500 to-teal-600",
+        requiereSSO: false
       },
       {
         id: "Recetascp",
@@ -130,7 +131,15 @@
         url: "https://systemsvcr-11.github.io/RecetasCP/",
         icono: "bar-chart-3",
         colorGradiente: "from-blue-500 to-indigo-600"
-      }
+      },
+      {
+        id: "Finanzas",
+        nombre: "Finanzas",
+        url: "https://control-compras-web.onrender.com/",
+        icono: "bar-chart-3",
+        colorGradiente: "from-blue-500 to-indigo-600",
+        requiereSSO: false
+      }      
     ];
 
     // ================= CONTROL DE ESTADO =================
@@ -181,7 +190,15 @@
             ${app.nombre}
           </span>
         `;
-        card.addEventListener("click", () => abrirAppConSSO(app.url));
+        card.addEventListener("click", () => {
+          if (app.requiereSSO) {
+            abrirAppConSSO(app.url);
+          } else {
+            // Navegación limpia directa (en la misma pestaña)
+            window.location.href = app.url;
+          }
+        });
+
         appsContainer.appendChild(card);
       });
       lucide.createIcons();
